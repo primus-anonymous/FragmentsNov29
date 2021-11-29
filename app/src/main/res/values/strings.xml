@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FragmentsNov29</string>
+    <string name="ebrg">Екатеринбург</string>
+    <string name="msc">Москва</string>
+    <string name="nsk">Новосибирск</string>
+    <string name="sam">Самара</string>
+    <string name="spb">Санкт-Петербург</string>
+</resources>
