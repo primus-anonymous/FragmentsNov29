@@ -1,5 +1,6 @@
 package com.neocaptainnemo.fragmentsnov29.ui.list;
 
+import com.neocaptainnemo.fragmentsnov29.domain.Callback;
 import com.neocaptainnemo.fragmentsnov29.domain.CitiesRepository;
 import com.neocaptainnemo.fragmentsnov29.domain.City;
 
@@ -7,9 +8,9 @@ import java.util.List;
 
 public class CitiesListPresenter {
 
-    private CitiesListView view;
+    private final CitiesListView view;
 
-    private CitiesRepository repository;
+    private final CitiesRepository repository;
 
     public CitiesListPresenter(CitiesListView view, CitiesRepository repository) {
         this.view = view;
@@ -18,8 +19,22 @@ public class CitiesListPresenter {
 
     public void refresh() {
 
-        List<City> result = repository.getAllCities();
+        view.showProgress();
 
-        view.showCities(result);
+        repository.getAllCities("cityName", new Callback<List<City>>() {
+            @Override
+            public void onSuccess(List<City> data) {
+                view.showCities(data);
+                view.hideProgress();
+            }
+
+            @Override
+            public void onError(Throwable error) {
+                view.hideProgress();
+                view.showError(error.getMessage());
+
+            }
+        });
+
     }
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,8 @@ public class CitiesListFragment extends Fragment implements CitiesListView {
     private LinearLayout citiesContainer;
 
     private CitiesListPresenter presenter;
+
+    private ProgressBar progressBar;
 
 //    private OnCityClicked onCityClicked;
 //
@@ -69,6 +72,7 @@ public class CitiesListFragment extends Fragment implements CitiesListView {
         super.onViewCreated(view, savedInstanceState);
 
         citiesContainer = view.findViewById(R.id.cities_container);
+        progressBar = view.findViewById(R.id.progress);
 
         presenter.refresh();
     }
@@ -102,5 +106,21 @@ public class CitiesListFragment extends Fragment implements CitiesListView {
             citiesContainer.addView(itemView);
         }
 
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
+
+    }
+
+    @Override
+    public void showError(String message) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

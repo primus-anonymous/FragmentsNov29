@@ -7,4 +7,10 @@ import java.util.List;
 public interface CitiesListView {
 
     void showCities(List<City> cities);
+
+    void showProgress();
+
+    void hideProgress();
+
+    void showError(String message);
 }
